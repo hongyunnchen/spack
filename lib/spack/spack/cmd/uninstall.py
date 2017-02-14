@@ -147,10 +147,10 @@ def do_uninstall(specs, force):
         try:
             # should work if package is known to spack
             packages.append(item.package)
-        except spack.repository.UnknownPackageError:
+        except spack.repository.UnknownEntityError:
             # The package.py file has gone away -- but still
             # want to uninstall.
-            spack.Package(item).do_uninstall(force=True)
+            spack.Package.uninstall_by_spec(item, force=True)
 
     # Sort packages to be uninstalled by the number of installed dependents
     # This ensures we do things in the right order
